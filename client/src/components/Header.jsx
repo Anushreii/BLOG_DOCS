@@ -1,4 +1,4 @@
-import { Button, Navbar, TextInput } from 'flowbite-react';
+import { Button, ButtonGroup, Navbar, TextInput } from 'flowbite-react';
 import { Link, useLocation } from 'react-router-dom';
 import { AiOutlineSearch } from 'react-icons/ai';
 import { BsMoon } from "react-icons/bs";
@@ -39,7 +39,8 @@ const Header = () => {
         
           {/* Sign In Button */}
           <Link to='/signin'>
-            <Button className='text-slate-100 bg-gradient-to-r from-purple-500 to-blue-500 hover:text-black transition-all duration-900' >Sign In</Button>
+           <Button className='bg-gradient-to-r from-blue-500 via-teal-400 to-green-500 hover:text-black transition-all duration-100
+'>Sign In</Button>
           </Link>
 
           {/* Hamburger Toggle */}
