@@ -10,7 +10,7 @@ const Header = () => {
     <div>
       <Navbar className='border-b-2 dark:bg-white'>
         <Link to="/" className='self-center whitespace-nowrap text-sm sm:text-xl font-semibold text-black dark:text-black'>
-          <span className='px-2 py-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg text-white hover:text-black transition-all duration-700'>Coders</span>
+          <span className='px-2 py-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg text-white hover:text-black transition-all duration-500'>Coders</span>
           Library
         </Link>
         
@@ -39,7 +39,7 @@ const Header = () => {
         
           {/* Sign In Button */}
           <Link to='/signin'>
-            <Button className='text-slate-100 bg-gradient-to-r from-purple-500 to-blue-500 hover:text-black transition-all duration-700'>Sign In</Button>
+            <Button className='text-slate-100 bg-gradient-to-r from-purple-500 to-blue-500 hover:text-black transition-all duration-900' >Sign In</Button>
           </Link>
 
           {/* Hamburger Toggle */}
