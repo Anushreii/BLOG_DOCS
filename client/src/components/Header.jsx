@@ -8,63 +8,59 @@ const Header = () => {
 
   return (
     <div>
-      <Navbar className='border-b-2  dark:bg-white'>
+      <Navbar className='border-b-2 dark:bg-white'>
         <Link to="/" className='self-center whitespace-nowrap text-sm sm:text-xl font-semibold text-black dark:text-black'>
-          <span className='px-2 py-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg text-white'>Coders</span>
+          <span className='px-2 py-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg text-white hover:text-black transition-all duration-700'>Coders</span>
           Library
         </Link>
         
         {/* Search Bar (visible on large screens) */}
-        <form className='flex items-center'>
+        <form className='hidden lg:flex items-center relative w-full max-w-sm'>
           <TextInput 
             type='text'
             placeholder='Search...'
             rightIcon={AiOutlineSearch}
-            className='hidden lg:inline'
+            className='w-full bg-white text-black border-gray-300 focus:ring-gray-400 focus:border-gray-400 placeholder-gray-500 pr-10' 
           />
+          
         </form>
 
-        {/* <div className='flex gap-2 md:order-2  if down not work in the home page use this or gpt*/}
+        {/* Right Section (Moon & Sign In Button) */}
         <div className='flex gap-2 sm:gap-4 md:order-2'>
+          {/* Mobile Search Button */}
+          <Button className='w-12 h-10 lg:hidden' color='gray' pill>
+            <AiOutlineSearch className='text-xl'/>
+          </Button>
 
-        {/* Mobile Search Button (visible on small screens) */}
-        <Button className='w-12 h-10 lg:hidden' color='gray' pill>
-          <AiOutlineSearch className='text-xl'/>
-        </Button>
-
-        {/* Moon Button (for Dark Mode Toggle) */}
-        <Button className='w-12 h-10 '  color='gray' pill>
-          <BsMoon className="text-lg" />
-        </Button> 
-        </div>
-      
-
-        <Link to='/signin'>
-          <Button className='text-bold bg-gradient-to-r from-purple-500  to-blue-500' >Sign In</Button>
-        </Link>
-        <Navbar.Toggle/>
-        <Navbar.Collapse>
-        <Navbar.Link active={path === '/'} as={'div'} >
-          <div className = 'hover:text-gray-700 !text-black'>
-          <Link to='/'>  Home  </Link>
-        </div>
-        </Navbar.Link>
-
-        <Navbar.Link active={path == '/'}  as={'div'}  >
-        <div className= 'hover:text-gray-700 !text-black'>
-          <Link to='/about'> About </Link>
-          </div>
-        </Navbar.Link>
-
-        <Navbar.Link active={path =="/"}  as={'div'}  className= 'hover:text-gray-700 !text-black'>
-          <Link to='/project'>
-            Projects
-          </Link>
-        </Navbar.Link>
+          {/* Dark Mode Toggle */}
+          <Button className='w-12 h-10' color='gray' pill>
+            <BsMoon className="text-lg" />
+          </Button> 
         
-       </Navbar.Collapse>
+          {/* Sign In Button */}
+          <Link to='/signin'>
+            <Button className='text-slate-100 bg-gradient-to-r from-purple-500 to-blue-500 hover:text-black transition-all duration-700'>Sign In</Button>
+          </Link>
+
+          {/* Hamburger Toggle */}
+          <Navbar.Toggle/>
+        </div>
+
+        {/* Hamburger Dropdown */}
+        <Navbar.Collapse>
+          <Navbar.Link as={Link} to="/" active={path === '/'} className="!text-black hover:text-gray-700">
+            Home
+          </Navbar.Link>
+
+          <Navbar.Link as={Link} to="/about" active={path === '/about'} className="!text-black hover:text-gray-700">
+            About
+          </Navbar.Link>
+
+          <Navbar.Link as={Link} to="/project" active={path === '/project'} className="!text-black hover:text-gray-700">
+            Projects
+          </Navbar.Link>
+        </Navbar.Collapse>
       </Navbar>
-    
     </div>
   );
 };
