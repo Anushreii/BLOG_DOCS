@@ -36,7 +36,7 @@ const Signup = () => {
         return setErrorMsg(data.message || 'Something went wrong');
       }
 
-      console.log('Signup successful:', data);
+      //console.log('Signup successful:', data);
       if(res.ok){
         navigate('/signin');
       }
