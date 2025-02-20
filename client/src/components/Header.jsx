@@ -15,7 +15,7 @@ const Header = () => {
     <div>
       <Navbar className='border-b dark:bg-gray-900 dark:text-white transition-all duration-300'>
         
-        <Link to="/" className='self-center whitespace-nowrap text-sm sm:text-xl font-semibold text-black dark:text-black'>
+        <Link to="/" className='self-center whitespace-nowrap text-sm sm:text-xl font-semibold text-black dark:text-white'>
           <span className='px-2 py-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg text-white hover:text-black transition-all duration-500'>Coders</span>
           Library
         </Link>
@@ -79,15 +79,15 @@ const Header = () => {
 
         {/* Hamburger Dropdown */}
         <Navbar.Collapse>
-          <Navbar.Link as={Link} to="/" active={path === '/'} className="!text-black hover:text-gray-700">
+          <Navbar.Link as={Link} to="/" active={path === '/'} className="text-black hover:text-gray-700">
             Home
           </Navbar.Link>
 
-          <Navbar.Link as={Link} to="/about" active={path === '/about'} className="!text-black hover:text-gray-700">
+          <Navbar.Link as={Link} to="/about" active={path === '/about'} className="text-black hover:text-gray-700 ">
             About
           </Navbar.Link>
 
-          <Navbar.Link as={Link} to="/project" active={path === '/project'} className="!text-black hover:text-gray-700">
+          <Navbar.Link as={Link} to="/project" active={path === '/project'} className="text-black hover:text-gray-700">
             Projects
           </Navbar.Link>
         </Navbar.Collapse>
