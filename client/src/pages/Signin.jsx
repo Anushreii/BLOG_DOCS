@@ -1,11 +1,14 @@
 import { Alert, Button, Label, Spinner, TextInput, } from 'flowbite-react';
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { signInStart, signInSuccess, signInFailure } from '../redux/user/userSlice';
 
 const Signin = () => {
   const [formData, setFormData] = useState({});
-  const [errorMsg, setErrorMsg] = useState(null);
-  const [loading, setLoading] = useState(false);
+  // const [errorMsg, setErrorMsg] = useState(null);
+  const {loading, error: errorMsg} = useSelector(state => state.user);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -14,12 +17,10 @@ const Signin = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setErrorMsg(null); // Reset error before submitting
-    setLoading(true);
+    dispatch(signInStart());
 
     if (!formData.email || !formData.password) {
-      setLoading(false);
-      return setErrorMsg('Please fill out all fields');
+      return dispatch(signInFailure('Please fill out all fields'));
     }
 
     try {
@@ -32,19 +33,20 @@ const Signin = () => {
       const data = await res.json();
 
       if (!res.ok) {
-        setLoading(false);
-        return setErrorMsg(data.message || 'Something went wrong');
+        
+        dispatch(signInFailure(data.message));
       }
 
       //console.log('Signup successful:', data);
       if(res.ok){
+        dispatch(signInSuccess(data))
         navigate('/');
       }
    
     } catch (error) {
-      setErrorMsg('Network error, please try again');
+     dispatch(signInFailure(error.message));
     } finally {
-      setLoading(false);
+      // setLoading(false);
       
     }
   };
