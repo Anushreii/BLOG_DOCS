@@ -55,7 +55,7 @@ const Signup = () => {
       <div className="flex p-3 max-w-3xl mx-auto flex-col md:flex-row md:items-center gap-5">
         {/* Left Side */}
         <div className="flex-1">
-          <Link to="/" className="font-bold text-black dark:text-black text-3xl">
+          <Link to="/" className="font-bold text-black dark:text-white text-3xl">
             <span className="px-2 py-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg text-white hover:text-black transition-all duration-500">
               Coders
             </span>

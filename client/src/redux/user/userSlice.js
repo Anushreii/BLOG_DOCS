@@ -18,6 +18,7 @@ const userSlice = createSlice({
         },
         signInSuccess : (state, action)=>{
                state.currentUser  = action.payload;
+         //console.log("User updated in Redux:", state.currentUser);
                state.loading = false;
                state.error = null;
         },
