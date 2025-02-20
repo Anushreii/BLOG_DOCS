@@ -12,7 +12,7 @@ const FooterCom = () => {
             <Link to="/" className='self-center whitespace-nowrap text-sm sm:text-lg font-semibold text-black dark:text-black'>
 
           <span className='px-2 py-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg text-white hover:text-black transition-all duration-500'>Coders</span>
-          Library
+         Library
         </Link>
             </div>
             <div className="grid grid-cols-2 gap-8 mt-4 sm:grid-cols-3 sm:gap-6">
@@ -69,7 +69,7 @@ const FooterCom = () => {
         </div>  
         <Footer.Divider/>
         <div className="w-full sm:flex sm:items-center sm:justify-between">
-            <Footer.Copyright href='#' by="Anushree's Blog" year={new Date().getFullYear()}></Footer.Copyright>
+            <Footer.Copyright href='#' by="Coders's Library" year={new Date().getFullYear()}></Footer.Copyright>
 
             <div className="flex gap-6 sm:mt-0 mt-4 sm:justify-center">
                 <Footer.Icon href='#' icon={BsFacebook}/>
