@@ -1,16 +1,19 @@
-import { Avatar, Button, ButtonGroup, Dropdown, Navbar, TextInput } from 'flowbite-react';
+import { Avatar, Button, Dropdown, Navbar, TextInput, theme } from 'flowbite-react';
 import { Link, useLocation } from 'react-router-dom';
 import { AiOutlineSearch } from 'react-icons/ai';
-import { BsMoon } from "react-icons/bs";
-import {useSelector} from 'react-redux'
+import { BsMoon, BsSun } from "react-icons/bs";
+import {useSelector, useDispatch} from 'react-redux'
+import { toggleTheme } from '../redux/theme/themeSlice';
 
 const Header = () => {
   const path = useLocation().pathname;
-  const {currentUser} = useSelector(state => state.user)
+  const dispatch = useDispatch();
+  const {theme} = useSelector(state => state.theme);
+  const {currentUser} = useSelector(state => state.user);//.user
 
   return (
     <div>
-      <Navbar className='border-b-1 dark:bg-white'>
+      <Navbar className='border-b dark:bg-gray-900 dark:text-white transition-all duration-300'>
         
         <Link to="/" className='self-center whitespace-nowrap text-sm sm:text-xl font-semibold text-black dark:text-black'>
           <span className='px-2 py-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg text-white hover:text-black transition-all duration-500'>Coders</span>
@@ -23,35 +26,34 @@ const Header = () => {
             type='text'
             placeholder='Search...'
             rightIcon={AiOutlineSearch}
-            className='w-full bg-white text-black border-gray-300 focus:ring-gray-400 focus:border-gray-400 placeholder-gray-500 pr-10' 
+            className='w-full bg-white text-black dark:bg-gray-800 dark:text-white border-gray-300 dark:border-gray-700 focus:ring-gray-400 focus:border-gray-400 placeholder-gray-500 dark:placeholder-gray-400 pr-10' 
           />
           
         </form>
 
         {/* Right Section (Moon & Sign In Button) */}
         <div className='flex gap-2 sm:gap-4 md:order-2'>
+
           {/* Mobile Search Button */}
-          <Button className='w-12 h-10 lg:hidden' color='gray' pill>
+          <Button className='w-12 h-10 lg:hidden' color='gray' pill >
             <AiOutlineSearch className='text-xl'/>
           </Button>
 
           {/* Dark Mode Toggle */}
-          <Button className='w-12 h-10' color='gray' pill>
-            <BsMoon className="text-lg" />
+          <Button onClick={()=>dispatch(toggleTheme())} className='w-12 h-10' color='gray' pill >
+             {theme === 'dark' ? <BsMoon className='text-xl'/> : <BsSun className='text-xl'/>}
+
+            {/* <BsMoon className={`text-lg ${theme === 'dark' ? 'text-yellow-50-400' : 'text-gray-900'}`} /> */}
           </Button>
 
          {currentUser ? (
           <Dropdown arrowIcon={false} inline 
           label={
-    
-
-            <Avatar alt ='user' img={currentUser.profilePicture || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhVSHxKxeD9Tdg65juWHA_tU_Hyt89DgJ3qQ&s"} rounded />
-            
-          }
-        >
+            <Avatar alt ='user' img={currentUser.profilePicture || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhVSHxKxeD9Tdg65juWHA_tU_Hyt89DgJ3qQ&s"} rounded />}
+            >
          
           <Dropdown.Header>
-            <span  className='block text-sm'>@{currentUser.username}</span>
+            <span className='block text-sm'>@{currentUser.username}</span>
             <span className='block text-sm font-medium truncate'>@{currentUser.email}</span>
           </Dropdown.Header>
 

@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  //  mode: 'jit',
+  darkMode: 'class', // 🔹 This is required for dark mode toggle to work
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
@@ -10,4 +10,4 @@ export default {
     extend: {},
   },
   plugins: [require('flowbite/plugin')],
-}
+};
