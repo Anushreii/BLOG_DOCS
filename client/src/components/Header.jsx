@@ -1,10 +1,12 @@
-import { Button, ButtonGroup, Navbar, TextInput } from 'flowbite-react';
+import { Avatar, Button, ButtonGroup, Dropdown, Navbar, TextInput } from 'flowbite-react';
 import { Link, useLocation } from 'react-router-dom';
 import { AiOutlineSearch } from 'react-icons/ai';
 import { BsMoon } from "react-icons/bs";
+import {useSelector} from 'react-redux'
 
 const Header = () => {
   const path = useLocation().pathname;
+  const {currentUser} = useSelector(state => state.user)
 
   return (
     <div>
@@ -36,13 +38,38 @@ const Header = () => {
           {/* Dark Mode Toggle */}
           <Button className='w-12 h-10' color='gray' pill>
             <BsMoon className="text-lg" />
-          </Button> 
-        
-          {/* Sign In Button */}
-          <Link to='/signin'>
-           <Button className='bg-gradient-to-r from-blue-500 via-teal-400 to-green-500 hover:text-black transition-all duration-100
-'>Sign In</Button>
+          </Button>
+
+         {currentUser ? (
+          <Dropdown arrowIcon={false} inline 
+          label={
+    
+
+            <Avatar alt ='user' img={currentUser.profilePicture || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhVSHxKxeD9Tdg65juWHA_tU_Hyt89DgJ3qQ&s"} rounded />
+            
+          }
+        >
+         
+          <Dropdown.Header>
+            <span  className='block text-sm'>@{currentUser.username}</span>
+            <span className='block text-sm font-medium truncate'>@{currentUser.email}</span>
+          </Dropdown.Header>
+
+          <Link to={'/dashboard?tab=profile'}>
+            <Dropdown.Item>Profile</Dropdown.Item>
           </Link>
+          
+          <Dropdown.Divider/>
+            <Dropdown.Item>Sign Out</Dropdown.Item>
+          </Dropdown>
+         ):
+         (
+          // {/* Sign In Button */}
+          <Link to='/signin'>
+           <Button className='bg-gradient-to-r from-blue-500 via-teal-400 to-green-500 hover:text-black transition-all duration-100'>Sign In</Button>
+          </Link>
+         )
+        }
 
           {/* Hamburger Toggle */}
           <Navbar.Toggle/>
