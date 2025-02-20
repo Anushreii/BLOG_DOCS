@@ -13,7 +13,7 @@ const Header = () => {
 
   return (
     <div>
-      <Navbar className='border-b dark:bg-gray-900 dark:text-white transition-all duration-300'>
+      <Navbar className='border-b dark:bg-gray-900 dark:text-white'>
         
         <Link to="/" className='self-center whitespace-nowrap text-sm sm:text-xl font-semibold text-black dark:text-white'>
           <span className='px-2 py-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg text-white hover:text-black transition-all duration-500'>Coders</span>
@@ -26,7 +26,7 @@ const Header = () => {
             type='text'
             placeholder='Search...'
             rightIcon={AiOutlineSearch}
-            className='w-full bg-white text-black dark:bg-gray-800 dark:text-white border-gray-300 dark:border-gray-700 focus:ring-gray-400 focus:border-gray-400 placeholder-gray-500 dark:placeholder-gray-400 pr-10' 
+            className='w-full bg-white text-black dark:bg-gray-900 dark:text-white border-gray-300 dark:border-gray-700 focus:ring-gray-400 focus:border-gray-400 placeholder-gray-500 dark:placeholder-gray-400 pr-10 shadow-none' 
           />
           
         </form>
