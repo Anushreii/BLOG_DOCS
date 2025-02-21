@@ -9,7 +9,7 @@ const Header = () => {
   const path = useLocation().pathname;
   const dispatch = useDispatch();
   const {theme} = useSelector(state => state.theme);
-  const {currentUser} = useSelector(state => state.theme);//.user
+  const {currentUser} = useSelector(state => state.user);//.user or / theme
 
   return (
     <div>
