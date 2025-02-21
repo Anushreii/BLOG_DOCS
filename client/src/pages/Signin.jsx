@@ -57,7 +57,7 @@ const Signin = () => {
         {/* Left Side */}
         <div className="flex-1">
           <Link to="/" className="font-bold text-black dark:text-black text-3xl">
-            <span className="px-2 py-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg text-white hover:text-black transition-all duration-500">
+            <span className="px-2 py-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg text-white hover:text-black transition-all duration-500" >
               Coders
             </span>
             Library
@@ -84,7 +84,7 @@ const Signin = () => {
 
             <Button
               type="submit"
-              className="bg-gradient-to-r from-blue-500 via-teal-400 to-green-500 font-bold hover:text-black transition-all duration-100"
+              className="bg-gradient-to-r from-blue-500 via-teal-400 to-green-500 font-bold hover:text-black transition-all duration-100" outline
               disabled={loading}>
               {loading ? (
                 <>

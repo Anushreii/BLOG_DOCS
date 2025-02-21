@@ -16,7 +16,7 @@ useEffect(()=>{
 }, [location.search])
 
   return(
-    <div className='min-h-screen flex flex-col md:flex-row'>
+    <div className='min-h-screen flex flex-col md:flex-row '>
       <div className="md:w-56 w-full md:flex-shrink-0">
       {/* sidebar */}
       <DashSidebar></DashSidebar>

@@ -87,7 +87,7 @@ const Signup = () => {
 
             <Button
               type="submit"
-              className="bg-gradient-to-r from-blue-500 via-teal-400 to-green-500 font-bold hover:text-black transition-all duration-100"
+              className="bg-gradient-to-r from-blue-500 via-teal-400 to-green-500 font-bold hover:text-black transition-all duration-100" outline
               disabled={loading}>
               {loading ? (
                 <>

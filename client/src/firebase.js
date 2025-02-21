@@ -8,7 +8,7 @@ const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
   authDomain: "coders-library-1ddc7.firebaseapp.com",
   projectId: "coders-library-1ddc7",
-  storageBucket: "coders-library-1ddc7.firebasestorage.app",
+  storageBucket: "coders-library-1ddc7.appspot.com",
   messagingSenderId: "930523354885",
   appId: "1:930523354885:web:6dd117b8d5261eb654896c"
 };
