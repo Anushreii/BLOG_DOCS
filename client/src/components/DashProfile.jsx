@@ -19,6 +19,8 @@ export default function DashProfile() {
     const [isUpdating, setIsUpdating] = useState(false);
     const filePickerRef = useRef();
 
+    //console.log("Updated Redux State in Dashboard:", currentUser);
+
     // Handle image selection
     const handleImageChange = (e) => {
         const file = e.target.files[0];
@@ -226,7 +228,7 @@ export default function DashProfile() {
                     ${messageType === "success" ? "bg-green-100 text-green-800 border-green-500" : "bg-red-100 text-red-800 border-red-500"}`}>
                     {message}
 
-                    <Alert color='failure' className=''></Alert>
+                    {/* <Alert color='failure' className=''>{error}</Alert> */}
                 </div>
             )}
 
