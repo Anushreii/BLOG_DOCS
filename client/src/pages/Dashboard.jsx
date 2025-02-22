@@ -21,7 +21,7 @@ useEffect(()=>{
       {/* sidebar */}
       <DashSidebar></DashSidebar>
     </div>
-
+           dashborad
     {/* profile */}
     {/* <div className='flex-1 p-4'> */}
     {tab === 'profile' && <DashProfile></DashProfile>}

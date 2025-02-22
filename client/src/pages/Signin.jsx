@@ -39,7 +39,8 @@ const Signin = () => {
 
       //console.log('Signup successful:', data);
       if(res.ok){
-        dispatch(signInSuccess(data))
+        dispatch(signInSuccess(data));
+       // localStorage.setItem("currentUser", JSON.stringify(data));
         navigate('/');
       }
    

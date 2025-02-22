@@ -19,6 +19,8 @@ const userSlice = createSlice({
          //console.log("User updated in Redux:", state.currentUser);
                state.loading = false;
                state.error = null;
+              // localStorage.setItem("currentUser", JSON.stringify(action.payload)); 
+              localStorage.setItem("profileImage", action.payload.profilePicture);
         },
 
         signInFailure : (state, action)=>{
@@ -57,6 +59,7 @@ const userSlice = createSlice({
             state.currentUser = null;
             state.error = null;
             state.loading = false;
+            localStorage.removeItem("currentUser");
         }
     },
 });
