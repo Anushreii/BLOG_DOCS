@@ -4,6 +4,7 @@ import { AiOutlineSearch } from 'react-icons/ai';
 import { BsMoon, BsSun } from "react-icons/bs";
 import {useSelector, useDispatch} from 'react-redux'
 import { toggleTheme } from '../redux/theme/themeSlice';
+import { signoutSuccess } from '../redux/user/userSlice';
 
 const Header = () => {
   const path = useLocation().pathname;
@@ -11,6 +12,23 @@ const Header = () => {
   const {theme} = useSelector(state => state.theme);
   const {currentUser} = useSelector(state => state.user);//.user or / theme
   const profileImage = currentUser?.profilePicture || localStorage.getItem("profileImage") || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhVSHxKxeD9Tdg65juWHA_tU_Hyt89DgJ3qQ&s";
+
+  const handleSignout = async() =>{
+    try {
+      const res = await fetch('/api/user/signout',{
+        method: 'POST',
+      });
+      const data = await res.json();
+      if(!res.ok){
+        console.log(data.message);
+      }else {
+        dispatch(signoutSuccess());
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
 
   return (
     <div>
@@ -63,7 +81,7 @@ const Header = () => {
           </Link>
           
           <Dropdown.Divider/>
-            <Dropdown.Item>Sign Out</Dropdown.Item>
+            <Dropdown.Item onClick={handleSignout}>Sign Out</Dropdown.Item>
           </Dropdown>
          ):
          (
