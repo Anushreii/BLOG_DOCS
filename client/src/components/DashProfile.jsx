@@ -9,6 +9,7 @@ export default function DashProfile() {
     const storedImage = localStorage.getItem("profileImage");
     const [imageUrl, setImageUrl] = useState(storedImage || currentUser.profilePicture);
     const [username, setUsername] = useState(currentUser.username);
+    const [email, setEmail] = useState(currentUser.email);
     const [password, setPassword] = useState("");
     const [message, setMessage] = useState("");
     const [messageType, setMessageType] = useState(""); // "success" or "error"
@@ -78,17 +79,20 @@ export default function DashProfile() {
             return;
         }
 
-        if ((username === currentUser.username && password === "") || (username.trim() === "" && password.trim() === "")) {
+        if (
+            (username === currentUser.username && email === currentUser.email && password === "") ||
+            (username.trim() === "" && email.trim() === "" && password.trim() === "")
+        ) {
             setMessage("No changes made!");
             setMessageType("error");
             return;
         }
 
         setIsUpdating(true);
-        setMessage(""); // Clear previous message
+        setMessage("");
 
         setTimeout(() => {
-            dispatch(updateUserSuccess({ ...currentUser, username }));
+            dispatch(updateUserSuccess({ ...currentUser, username, email }));
             setMessage("User profile updated successfully!");
             setMessageType("success");
             setIsUpdating(false);
@@ -136,7 +140,7 @@ export default function DashProfile() {
                     <div className={`w-32 h-32 shadow-md overflow-hidden rounded-full border-8 border-[lightgray] ${uploadProgress > 0 && uploadProgress < 100 ? "blur-md" : ""}`}>
                         <img 
                             src={imageUrl} 
-                            alt="User"
+                            alt="user"
                             className='rounded-full w-full h-full object-cover' 
                         />
                     </div>
@@ -149,6 +153,15 @@ export default function DashProfile() {
                     placeholder='Username' 
                     value={username} 
                     onChange={(e) => setUsername(e.target.value)}
+                />
+
+                {/* Email Input */}
+                <TextInput 
+                    type='email' 
+                    id='email' 
+                    placeholder='Email' 
+                    value={email} 
+                    onChange={(e) => setEmail(e.target.value)}
                 />
 
                 {/* Password Input */}
