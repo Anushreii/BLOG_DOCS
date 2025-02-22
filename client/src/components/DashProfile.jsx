@@ -1,37 +1,47 @@
 import { Button, TextInput } from 'flowbite-react';
 import { useRef, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { updateUserSuccess } from '../redux/user/userSlice';
 
 export default function DashProfile() {
+    const dispatch = useDispatch();
     const { currentUser } = useSelector(state => state.user);
     const storedImage = localStorage.getItem("profileImage");
     const [imageUrl, setImageUrl] = useState(storedImage || currentUser.profilePicture);
-    const [error, setError] = useState(""); 
-    const [uploadProgress, setUploadProgress] = useState(0); 
+    const [username, setUsername] = useState(currentUser.username);
+    const [password, setPassword] = useState("");
+    const [message, setMessage] = useState("");
+    const [messageType, setMessageType] = useState(""); // "success" or "error"
+    const [uploadProgress, setUploadProgress] = useState(0);
+    const [isUpdating, setIsUpdating] = useState(false);
     const filePickerRef = useRef();
 
     // Handle image selection
     const handleImageChange = (e) => {
         const file = e.target.files[0];
 
-        if (!file) return; 
+        if (!file) return;
 
         if (e.target.files.length > 1) {
-            triggerAlert("Please select only one image.");
+            setMessage("Please select only one image.");
+            setMessageType("error");
             return;
         }
 
         if (!file.type.startsWith("image/")) {
-            triggerAlert("Could not upload image (File must be less than 2MB)");
+            setMessage("File must be an image.");
+            setMessageType("error");
             return;
         }
 
         if (file.size > 2 * 1024 * 1024) {
-            triggerAlert("Could not upload image (File must be less than 2MB)");
+            setMessage("File must be less than 2MB.");
+            setMessageType("error");
             return;
         }
 
-        setError(""); 
+        setMessage("");
+        setMessageType("");
 
         // Simulate Upload Progress
         setUploadProgress(10);
@@ -54,19 +64,42 @@ export default function DashProfile() {
             const base64Image = reader.result;
             setImageUrl(base64Image);
             localStorage.setItem("profileImage", base64Image);
+            dispatch(updateUserSuccess({ profilePicture: base64Image }));
         };
     };
 
-    const triggerAlert = (message) => {
-        setError(message);
-        alert(message);
+    // Handle profile update
+    const handleUpdate = (e) => {
+        e.preventDefault();
+
+        if (isUpdating) {
+            setMessage("Please wait, profile is updating...");
+            setMessageType("error");
+            return;
+        }
+
+        if ((username === currentUser.username && password === "") || (username.trim() === "" && password.trim() === "")) {
+            setMessage("No changes made!");
+            setMessageType("error");
+            return;
+        }
+
+        setIsUpdating(true);
+        setMessage(""); // Clear previous message
+
+        setTimeout(() => {
+            dispatch(updateUserSuccess({ ...currentUser, username }));
+            setMessage("User profile updated successfully!");
+            setMessageType("success");
+            setIsUpdating(false);
+        }, 2000);
     };
 
     return (
         <div className='max-w-lg mx-auto p-3 w-full'>
             <h1 className='my-7 text-center font-semibold text-3xl'>Profile</h1>
 
-            <form className='flex flex-col gap-4'>
+            <form className='flex flex-col gap-4' onSubmit={handleUpdate}>
                 <input 
                     type="file"
                     accept="image/*"
@@ -75,6 +108,7 @@ export default function DashProfile() {
                     hidden
                 />
 
+                {/* Profile Image */}
                 <div className="relative self-center cursor-pointer" onClick={() => filePickerRef.current.click()}>
                     {uploadProgress > 0 && (
                         <svg className="absolute -top-2 -left-2 w-36 h-36" viewBox="0 0 100 100">
@@ -102,27 +136,51 @@ export default function DashProfile() {
                     <div className={`w-32 h-32 shadow-md overflow-hidden rounded-full border-8 border-[lightgray] ${uploadProgress > 0 && uploadProgress < 100 ? "blur-md" : ""}`}>
                         <img 
                             src={imageUrl} 
-                            alt="user"
+                            alt="User"
                             className='rounded-full w-full h-full object-cover' 
                         />
                     </div>
                 </div>
 
-                {error && <p className="text-red-500 text-center font-semibold">{error}</p>}
+                {/* Username Input */}
+                <TextInput 
+                    type='text' 
+                    id='username' 
+                    placeholder='Username' 
+                    value={username} 
+                    onChange={(e) => setUsername(e.target.value)}
+                />
 
-                <TextInput type='text' id='username' placeholder='username' defaultValue={currentUser.username} />
-                <TextInput type='email' id='email' placeholder='email' defaultValue={currentUser.email} />
-                <TextInput type='password' id='password' placeholder='password' />
+                {/* Password Input */}
+                <TextInput 
+                    type='password' 
+                    id='password' 
+                    placeholder='New Password' 
+                    value={password} 
+                    onChange={(e) => setPassword(e.target.value)}
+                />
 
-                <Button type='submit' gradientDuoTone='purpleToBlue' outline>
-                    Update
-                </Button>
+                {/* Update Button */}
+                <div className="relative">
+                    <Button type='submit' gradientDuoTone='purpleToBlue' outline className="w-full">
+                        {isUpdating ? "Updating..." : "Update"}
+                    </Button>
+                </div>
             </form>
 
+            {/* Delete & Sign Out Links */}
             <div className="text-red-600 flex justify-between mt-5">
                 <span className='cursor-pointer'>Delete Account</span>
                 <span className='cursor-pointer'>Sign Out</span>
             </div>
+            
+            {/* Message Box */}
+            {message && (
+                <div className={`mt-4 p-3 border rounded-md text-center font-semibold flex justify-center
+                    ${messageType === "success" ? "bg-green-100 text-green-800 border-green-500" : "bg-red-100 text-red-800 border-red-500"}`}>
+                    {message}
+                </div>
+            )}
         </div>
     );
 }

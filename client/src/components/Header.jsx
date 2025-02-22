@@ -10,6 +10,7 @@ const Header = () => {
   const dispatch = useDispatch();
   const {theme} = useSelector(state => state.theme);
   const {currentUser} = useSelector(state => state.user);//.user or / theme
+  const profileImage = currentUser?.profilePicture || localStorage.getItem("profileImage") || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhVSHxKxeD9Tdg65juWHA_tU_Hyt89DgJ3qQ&s";
 
   return (
     <div>

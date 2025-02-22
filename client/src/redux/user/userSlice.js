@@ -1,7 +1,7 @@
 import { createSlice, current } from "@reduxjs/toolkit";
 
 const initialState = {
-    currentUser : null,
+    currentUser : JSON.parse(localStorage.getItem("currentUser")) || null,
     error : null,
     loading: false
 }
@@ -25,10 +25,23 @@ const userSlice = createSlice({
             state.loading = false;
             state.error = action.payload;
 
-        }
+        },
+
+        updateUserSuccess : (state, action) =>{
+            state.loading = false;
+            state.currentUser = { ...state.currentUser, ...action.payload }; // Update Redux state
+            localStorage.setItem("currentUser", JSON.stringify(state.currentUser)); // Persist data
+        },
+
+        updateUserFailure: (state, action) => {
+            state.loading = false;
+            state.error = action.payload;
+          },
+
+        
     }
 });
 
-export const { signInStart, signInSuccess, signInFailure} = userSlice.actions;
+export const { updateUserSuccess, updateUserFailure, signInStart, signInSuccess, signInFailure} = userSlice.actions;
 
 export default userSlice.reducer;
