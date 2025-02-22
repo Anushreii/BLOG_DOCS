@@ -13,7 +13,7 @@ export const signup = async(req,res, next)=>{
     || email === '' 
     || password === ''
     ){
-    next(errorHandler(400, "All Field are required"));
+    return next(errorHandler(400, "All Field are required"));
    }
 
    const hashedPassword = bcryptjs.hashSync(password, 10);
@@ -34,35 +34,55 @@ export const signup = async(req,res, next)=>{
 
 export const signin = async(req, res, next) => {
    const { email, password } = req.body;
+   //console.log("JWT_SECRET:", process.env.JWT_SECRET);
+   //console.log("Received Signin Request:", req.body);
 
 
    if(!email || !password || email === "" || password === ""){
-      return next(errorHandler(400, 'All feilds are required'));
+    //  console.log("Error: Missing email or password");
+      return next(errorHandler(400, 'All fields are required'));
    }
    try {
       const validUser = await User.findOne({email});
       if(!validUser){
+        // console.log("Error: User not found for email:", email);
           return next(errorHandler(404, 'User not found'));
       }
       const validPassword = bcryptjs.compareSync(password, validUser.password);
+
       if(!validPassword){
+        // console.log("Error: Incorrect password for user:", validUser.email);
         return next(errorHandler(400, 'invalid password'));
       }
+      //console.log("User Found:", validUser);
 
+      try {
+         // console.log("Signing JWT for User ID:", validUser._id);
+
+      
       const token = jwt.sign(
         {id: validUser._id}, process.env.JWT_SECRET);
+        if (!token) {
+        // console.log("Error: Token generation failed!");
+         return next(errorHandler(500, "Token generation failed"));
+      }
+      
+      //console.log("Generated Token:", token);
 
         const{ password: pass, ...rest } = validUser._doc;
-
-
         res.status(200).cookie('access_token', token,{
          httpOnly: true,
-        })
-        .json(rest);
-   } catch (error) {
-      next(error);
+        }).json(rest);
+
+   } catch (jwtError) {
+     // console.error("JWT Signing Error:", jwtError);
+      return next(errorHandler(500, "Internal Server Error - JWT Issue"));
    }
+}catch(error){
+   //console.error("Signin Error:", error);
+      next(error);
 }
+};
 
 export const google = async(req, res, next) => {
    const {email, name, googlePhotoUrl} = req.body;

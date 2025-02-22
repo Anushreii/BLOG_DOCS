@@ -2,20 +2,29 @@ import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv'
 import userRoutes from './routes/user.route.js';
-import authRoutes from './routes/auth.route.js'
+import authRoutes from './routes/auth.route.js';
+import cookieParser from 'cookie-parser';
+
 
 dotenv.config();
 
-const app = express();
 mongoose.connect(process.env.MONGO)
 .then(()=>{  //debuging
     console.log("Mongodb connected sucessfully")
 })
 .catch((err)=>{
    console.log(err);
-})
+});
+
+const app = express();
 
 app.use(express.json());
+app.use(cookieParser());
+
+// app.use(cors({
+//   origin: "http://localhost:5173", // Update with your frontend URL
+//   credentials: true, // Allow credentials (cookies)
+// }));
 
 app.listen(3000,()=>{
     console.log("server is running on port 3000");

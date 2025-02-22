@@ -68,7 +68,7 @@ const Header = () => {
          (
           // {/* Sign In Button */}
           <Link to='/signin'>
-           <Button className='bg-gradient-to-r from-blue-500 via-teal-400 to-green-500 hover:text-black transition-all duration-100'>Sign In</Button>
+           <Button className='bg-gradient-to-r from-blue-500 via-teal-400 to-green-500 hover:text-black transition-all duration-100' outline>Sign In</Button>
           </Link>
          )
         }
