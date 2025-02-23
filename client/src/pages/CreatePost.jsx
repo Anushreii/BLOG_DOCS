@@ -10,6 +10,7 @@ export default function CreatePost() {
   const [imageUploadError, setImageUploadError] = useState(null);
   const [formData, setFormData] = useState({});
   const [publishError, setPublishError] = useState(null);
+  
   const navigate = useNavigate();
 
   // Function to handle image upload (store in localStorage)
@@ -27,15 +28,17 @@ export default function CreatePost() {
     
     reader.onprogress = (event) => {
       if (event.lengthComputable) {
-        const progress = Math.round((event.loaded / event.total) * 100);
+        const progress = ((event.loaded / event.total) * 100).toFixed(0);
         setImageUploadProgress(progress);
       }
     };
 
-    reader.onloadend = () => {
-      localStorage.setItem('uploadedImage', reader.result);
+    reader.onload = () => {
+      const base64String = reader.result; // Convert image to Base64
+      localStorage.setItem("uploadedImage", base64String); // Store in localStorage
+      setFormData({ ...formData, image: base64String }); // Save in formData
       setImageUploadProgress(null);
-      setFormData({ ...formData, imageKey: 'uploadedImage' });
+      setImageUploadError(null);
     };
 
     reader.onerror = () => {
@@ -113,8 +116,8 @@ export default function CreatePost() {
         </div>
 
         {imageUploadError && <Alert color='failure'>{imageUploadError}</Alert>}
-        {formData.imageKey && (
-          <img src={localStorage.getItem('uploadedImage')} alt='upload' className='w-full h-72 object-cover' />
+        {formData.image && (
+          <img src={formData.image} alt='upload' className='w-full h-72 object-cover' />
         )}
 
         <ReactQuill
