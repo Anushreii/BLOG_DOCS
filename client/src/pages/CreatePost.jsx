@@ -15,6 +15,23 @@ export default function CreatePost() {
                     <option value="javascipt">JavaScript</option>
                     <option value="reactjs">React.js</option>
                     <option value="nextjs">Next.js</option>
+                    <option value="angular">Angular</option>
+                    <option value="vuejs">Vue.js</option>
+                    <option value="svelte">Svelte</option>
+                    <option value="nodejs">Node.js</option>
+                    <option value="express">Express.js</option>
+                    <option value="mongodb">MongoDB</option>
+                     <option value="sql">SQL</option>
+                    <option value="firebase">Firebase</option>
+                    <option value="aws">AWS</option>
+                   <option value="devops">DevOps</option>
+                   <option value="frontend">Frontend</option>
+                   <option value="backend">Backend</option>
+                   <option value="fullstack">Full Stack Development</option>
+                  <option value="testing">Testing & Debugging</option>
+                 <option value="datastructures">Data Structures</option>
+                 <option value="algorithms">Algorithms</option>
+                 <option value="career">Career & Interview Prep</option>
                     {/* <option value="angular">Angular</option> */}
                 </Select>
         </div>
