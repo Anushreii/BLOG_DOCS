@@ -10,10 +10,11 @@ import { updateUserSuccess,
 
      } from '../redux/user/userSlice';
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
+import {Link} from 'react-router-dom'
 
 export default function DashProfile() {
     const dispatch = useDispatch();
-    const { currentUser, error } = useSelector(state => state.user);
+    const { currentUser, error, loading } = useSelector(state => state.user);
     const storedImage = localStorage.getItem("profileImage");
     const [imageUrl, setImageUrl] = useState(storedImage || currentUser.profilePicture);
     const [username, setUsername] = useState(currentUser.username);
@@ -234,9 +235,17 @@ export default function DashProfile() {
 
                 {/* Update Button */}
                 <div className="relative">
-                    <Button type='submit' gradientDuoTone='purpleToBlue' outline className="w-full">
-                        {isUpdating ? "Updating..." : "Update"}
+                    <Button type='submit' gradientDuoTone='purpleToPink' outline className="w-full" disabled={loading || uploadProgress}>
+                        {loading ? "Loading..." : "Update"}
                     </Button>
+                    {
+                        currentUser.isAdmin && (
+                            <Link to={'/create-post'}>
+                            <Button type='button' className='w-full mt-4'  gradientDuoTone='purpleToBlue'>
+                           Create a post</Button>
+                            </Link>
+                        )
+                    }
                 </div>
             </form>
 
