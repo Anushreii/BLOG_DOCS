@@ -5,7 +5,6 @@ import { Spinner } from 'flowbite-react';
 import CallToAction from '../components/CallToAction';
 import CommentSection from '../components/CommentSection';
 
-
 export default function PostPage() {
   const { postSlug } = useParams();
   const [loading, setLoading] = useState(true);
@@ -44,7 +43,7 @@ export default function PostPage() {
         <Spinner size='xl'></Spinner>
       </div>
     );
-    
+
   return <main className='p-3 flex flex-col max-w-6xl mx-auto min-h-screen'>
     <h1 className='text-3xl mt-10 p-3 text-center font-serif max-w-2xl mx-auto lg:text-4xl'>{post && post.title}</h1>
     <Link to={`/search?category=${post && post.category}`} className='self-center mt-5'>
@@ -60,8 +59,10 @@ export default function PostPage() {
     </div>
 
     <div className="">
+      
     <CommentSection postId={post._id} />
     </div>
+    
 
     <div className="max-w-4xl mx-auto w-full">
         <CallToAction />
