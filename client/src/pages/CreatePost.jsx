@@ -10,7 +10,6 @@ export default function CreatePost() {
   const [imageUploadError, setImageUploadError] = useState(null);
   const [formData, setFormData] = useState({});
   const [publishError, setPublishError] = useState(null);
-  
   const navigate = useNavigate();
 
   // Function to handle image upload (store in localStorage)
@@ -28,17 +27,15 @@ export default function CreatePost() {
     
     reader.onprogress = (event) => {
       if (event.lengthComputable) {
-        const progress = ((event.loaded / event.total) * 100).toFixed(0);
+        const progress = Math.round((event.loaded / event.total) * 100);
         setImageUploadProgress(progress);
       }
     };
 
-    reader.onload = () => {
-      const base64String = reader.result; // Convert image to Base64
-      localStorage.setItem("uploadedImage", base64String); // Store in localStorage
-      setFormData({ ...formData, image: base64String }); // Save in formData
+    reader.onloadend = () => {
+      localStorage.setItem('uploadedImage', reader.result);
       setImageUploadProgress(null);
-      setImageUploadError(null);
+      setFormData({ ...formData, imageKey: 'uploadedImage' });
     };
 
     reader.onerror = () => {
@@ -93,6 +90,25 @@ export default function CreatePost() {
             <option value='javascript'>JavaScript</option>
             <option value='reactjs'>React.js</option>
             <option value='nextjs'>Next.js</option>
+            <option value="angular">Angular</option>
+                    <option value="vuejs">Vue.js</option>
+                    <option value="svelte">Svelte</option>
+                    <option value="nodejs">Node.js</option>
+                    <option value="express">Express.js</option>
+                    <option value="mongodb">MongoDB</option>
+                     <option value="sql">SQL</option>
+                    <option value="firebase">Firebase</option>
+                    <option value="aws">AWS</option>
+                   <option value="devops">DevOps</option>
+                   <option value="frontend">Frontend</option>
+                   <option value="backend">Backend</option>
+                   <option value="fullstack">Full Stack Development</option>
+                  <option value="testing">Testing & Debugging</option>
+                 <option value="datastructures">Data Structures</option>
+                 <option value="algorithms">Algorithms</option>
+                 <option value="career">Career & Interview Prep</option>   
+                 <option value="career">OTHERS</option>   
+            
           </Select>
         </div>
         
@@ -116,8 +132,8 @@ export default function CreatePost() {
         </div>
 
         {imageUploadError && <Alert color='failure'>{imageUploadError}</Alert>}
-        {formData.image && (
-          <img src={formData.image} alt='upload' className='w-full h-72 object-cover' />
+        {formData.imageKey && (
+          <img src={localStorage.getItem('uploadedImage')} alt='upload' className='w-full h-72 object-cover' />
         )}
 
         <ReactQuill
