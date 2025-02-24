@@ -11,10 +11,15 @@ const storage = multer.diskStorage({
   },
   filename: function (req, file, cb) {
     cb(null, Date.now() + path.extname(file.originalname)); // Rename file with timestamp
+     // cb(null, file.originalname.split('.')[0] + '-' + Date.now() + path.extname(file.originalname));
   },
 });
 
-const upload = multer({ storage: storage });
+// Corrected multer configuration
+const upload = multer({
+  storage: storage, // Ensure storage is set
+  limits: { fileSize: 500 * 1024 * 1024 }, // 500MB file size limit
+});
 
 // File upload route
 router.post("/upload", upload.single("image"), (req, res) => {
@@ -25,4 +30,3 @@ router.post("/upload", upload.single("image"), (req, res) => {
 });
 
 export default router;
-

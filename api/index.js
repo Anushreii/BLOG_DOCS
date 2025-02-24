@@ -13,6 +13,10 @@ dotenv.config();
 const app = express();
 app.use(cors());
 
+// Increase body size limit
+app.use(express.json({ limit: '500mb' }));
+app.use(express.urlencoded({ limit: '500mb', extended: true }));
+
 // Serve uploaded images statically
 app.use("/uploads", express.static("uploads"));
 
