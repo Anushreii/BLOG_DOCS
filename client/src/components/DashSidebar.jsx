@@ -1,6 +1,6 @@
 import React from 'react'
 import { Sidebar } from 'flowbite-react'
-import {HiArrowSmRight, HiDocumentText, HiOutlineUserGroup, HiUser} from 'react-icons/hi'
+import {HiArrowSmRight, HiDocumentText, HiOutlineUserGroup, HiUser, HiAnnotation} from 'react-icons/hi'
 import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
@@ -75,6 +75,17 @@ const handleSignout = async() =>{
                   </Sidebar.Item>
                   </Link>
             )}
+            <>
+            <Link to='/dashboard?tab=comments'>
+                  <Sidebar.Item 
+                  active={tab === 'comments'} 
+                  icon={HiAnnotation} 
+                   as='div' >
+                    Comments
+                  </Sidebar.Item>
+                  </Link>
+            
+            </>
 
                   <Sidebar.Item icon={HiArrowSmRight} className='cursor-pointer' onClick={handleSignout} >
                     Sign Out
