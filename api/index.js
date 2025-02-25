@@ -8,7 +8,7 @@ import postRoutes from './routes/post.route.js'
 import cookieParser from 'cookie-parser';
 import uploadroutes from './routes/upload.route.js';
 import commentRoutes from './routes/comment.route.js';
-import path from 'path';
+//import path from 'path';
 
 dotenv.config();
 
@@ -30,18 +30,12 @@ mongoose.connect(process.env.MONGO)
    console.log(err);
 });
 
-const __dirname = path.resolve();
+//const __dirname = path.resolve();
 
 app.use(express.json());
 app.use(cookieParser());
 
 
-
-
-// app.use(cors({
-//   origin: "http://localhost:5173", // Update with your frontend URL
-//   credentials: true, // Allow credentials (cookies)
-// }));
 
 app.listen(3000,()=>{
     console.log("server is running on port 3000");
@@ -54,9 +48,9 @@ app.use("/api", uploadroutes);
 app.use('/api/comment', commentRoutes);
 app.use(express.static(path.join(__dirname, '/client/dist')));
 
-app.get('*',(req, res) =>{
-  res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
-})
+// app.get('*',(req, res) =>{
+//   res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
+// })
 
 
 app.use((err, req, res, next)=>{
