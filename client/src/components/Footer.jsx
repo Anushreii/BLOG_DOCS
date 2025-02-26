@@ -29,7 +29,7 @@ const FooterCom = () => {
                 <Footer.Link href='https://coders-library-2.onrender.com/'
                 target='_blank'  //  helps to go to particular page
                 rel='noopener norefferer'>
-                    blog
+                    Blog
                 </Footer.Link>
                </Footer.LinkGroup>
          </div>
