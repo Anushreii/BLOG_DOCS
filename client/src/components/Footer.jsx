@@ -24,7 +24,7 @@ const FooterCom = () => {
                 <Footer.Link href='https://protfolioo-web.netlify.app/'
                 target='_blank'  //  helps to go to particular page
                 rel='noopener norefferer'>
-                   projects
+                    Projects
                 </Footer.Link>
                 <Footer.Link href='https://coders-library-2.onrender.com/'
                 target='_blank'  //  helps to go to particular page
@@ -72,7 +72,7 @@ const FooterCom = () => {
 
             <div className="flex gap-6 sm:mt-0 mt-4 sm:justify-center">
                 <Footer.Icon href='#' icon={BsFacebook}/>
-                <Footer.Icon href='#' icon={BsLinkedin}/>
+                <Footer.Icon href='https://www.linkedin.com/in/anushreii-v13' icon={BsLinkedin}/>
                 <Footer.Icon href='https://github.com' icon={BsGithub}/>
                 <Footer.Icon href='#' icon={BsTwitter}/>
             </div>
