@@ -1,7 +1,7 @@
 import { Footer } from 'flowbite-react'
 import { Link } from 'react-router-dom'
 import React from 'react'
-import { BsFacebook, BsGithub, BsInstagram, BsTwitter } from 'react-icons/bs'
+import { BsFacebook, BsGithub, BsInstagram, BsLinkedin, BsTwitter } from 'react-icons/bs'
 
 const FooterCom = () => {
   return (
@@ -21,12 +21,12 @@ const FooterCom = () => {
                <Footer.Title title='About'/>
 
                <Footer.LinkGroup col>
-                <Footer.Link href='http://www'
+                <Footer.Link href='https://protfolioo-web.netlify.app/'
                 target='_blank'  //  helps to go to particular page
                 rel='noopener norefferer'>
-                   project 100
+                   projects
                 </Footer.Link>
-                <Footer.Link href='/about'
+                <Footer.Link href='https://coders-library-2.onrender.com/'
                 target='_blank'  //  helps to go to particular page
                 rel='noopener norefferer'>
                     blog
@@ -37,15 +37,16 @@ const FooterCom = () => {
                <Footer.Title title='Follow'/>
 
                <Footer.LinkGroup col>
-                <Footer.Link href='http://www'
+                <Footer.Link href='https://github.com/Anushreii'
                 target='_blank'  //  helps to go to particular page
                 rel='noopener norefferer'>
                    Github
                 </Footer.Link>
-                <Footer.Link href='/github.com'
+
+                <Footer.Link href='https://www.linkedin.com/in/anushreii-v13'
                 target='_blank'  //  helps to go to particular page
                 rel='noopener norefferer'>
-                  Instagram
+                  Linkedin
                 </Footer.Link>
                </Footer.LinkGroup>
          </div>
@@ -53,14 +54,12 @@ const FooterCom = () => {
                <Footer.Title title='Legal'/>
 
                <Footer.LinkGroup col>
-                <Footer.Link href='#'
-                target='_blank'  //  helps to go to particular page
-                rel='noopener norefferer'>
-                 privacy
+                <Footer.Link href='#'>
+                 Privacy
                 </Footer.Link>
                 <Footer.Link href='/about'
-                target='_blank'  //  helps to go to particular page
-                rel='noopener norefferer'>
+                //  helps to go to particular page
+              >
                    Term &amp; conditions
                 </Footer.Link>
                </Footer.LinkGroup>
@@ -73,7 +72,7 @@ const FooterCom = () => {
 
             <div className="flex gap-6 sm:mt-0 mt-4 sm:justify-center">
                 <Footer.Icon href='#' icon={BsFacebook}/>
-                <Footer.Icon href='#' icon={BsInstagram}/>
+                <Footer.Icon href='#' icon={BsLinkedin}/>
                 <Footer.Icon href='https://github.com' icon={BsGithub}/>
                 <Footer.Icon href='#' icon={BsTwitter}/>
             </div>
