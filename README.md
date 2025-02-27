@@ -1,4 +1,4 @@
-# ** Coder's Library**  
+# **Coder's Library**  
 A Feature-rich blog website for developers to share programming documentation, projects, tutorials, and technical blogs.
 
 ## 🚀 **Live Demo**  
