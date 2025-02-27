@@ -1,5 +1,5 @@
-# **📝 Coder's Library**  
-A feature-rich blog website for developers to share programming documentation, tutorials, and technical blogs.
+# ** Coder's Library**  
+A Feature-rich blog website for developers to share programming documentation, projects, tutorials, and technical blogs.
 
 ## 🚀 **Live Demo**  
 [🔗https://coders-library-2.onrender.com/ ](#)
